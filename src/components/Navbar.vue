@@ -1,5 +1,4 @@
 <template>
-<!-- <div class="main-nav">  -->
    <nav class="navbar navbar-dark bg-dark justify-content-between flex-nowrap flex-row">
       <div class="container">
         <a class="navbar-brand float-left">Firebase Vue CRUD PWA</a>
@@ -7,32 +6,14 @@
           <li class="nav-item">
             <router-link class="nav-link pr-3" to="/">Login</router-link>
           </li>       
-        </ul>
-        <!-- <div>
-          <b-button v-b-modal.modal-center>Launch centered modal</b-button>
-
-          <b-modal id="modal-center" centered title="BootstrapVue">
-            <p class="my-4">Vertically centered modal!</p>
-          </b-modal>
-        </div> -->
-      </div>
-      
-      <!-- <button class="mx-2" @click="$emit('open-login-modal')">Login</button> -->
+        </ul>        
+      </div>        
     </nav>
-<!-- </div> -->
-
-  <!-- <nav class="main-nav">
-    <router-link :to="{ name: 'Home' }">Users</router-link>
-    <router-link :to="{ name: 'About' }">About</router-link>
-  </nav> -->
 </template>
 
 <script>
-// import LoginModal from "./components/LoginModal"
-
 export default {
-  name: 'main-nav',
-  // components: {LoginModal}
+  name: 'main-nav'  
 }
 </script>
 

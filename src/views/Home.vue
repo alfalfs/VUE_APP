@@ -10,7 +10,6 @@
 </template>
 
 <script>
-
 import Navbar from '@/components/Navbar.vue'
 import UserCreate from '@/components/UserCreate.vue'
 import UserList from '@/components/UserList.vue'
