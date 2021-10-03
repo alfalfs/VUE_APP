@@ -1,38 +1,52 @@
 <template>
-<!-- <div class="main-nav">  -->
    <nav class="navbar navbar-dark bg-dark justify-content-between flex-nowrap flex-row">
       <div class="container">
         <a class="navbar-brand float-left">Firebase Vue CRUD PWA</a>
-        <ul class="nav navbar-nav flex-row float-right">
+        <ul class="nav navbar-nav flex-row float-right">         
+              <router-link
+                v-for="item in list"
+                  :key="item.to"
+                    class="nav-link pr-3"
+                   :to="item.to"
+                >{{ item.title }}
+              </router-link>            
           <li class="nav-item">
-            <router-link class="nav-link pr-3" to="/">Login</router-link>
+            <!-- <router-link class="nav-link pr-3" to="/">Login</router-link> -->
+           <button @click="signOutUser">Sign Out</button> 
           </li>       
-        </ul>
-        <!-- <div>
-          <b-button v-b-modal.modal-center>Launch centered modal</b-button>
-
-          <b-modal id="modal-center" centered title="BootstrapVue">
-            <p class="my-4">Vertically centered modal!</p>
-          </b-modal>
-        </div> -->
-      </div>
-      
-      <!-- <button class="mx-2" @click="$emit('open-login-modal')">Login</button> -->
+        </ul>        
+      </div>        
     </nav>
-<!-- </div> -->
-
-  <!-- <nav class="main-nav">
-    <router-link :to="{ name: 'Home' }">Users</router-link>
-    <router-link :to="{ name: 'About' }">About</router-link>
-  </nav> -->
 </template>
 
 <script>
-// import LoginModal from "./components/LoginModal"
-
+import { getAuth, signOut } from 'firebase/auth'
+import { useAuthState } from '../firebase'
+import { useRouter } from 'vue-router'
 export default {
-  name: 'main-nav',
-  // components: {LoginModal}
+  name: 'main-nav',  
+  data() {
+    return {
+      list: [
+        // { title: "Home", to: "/" },
+        // { title: "LogOut", to: "/Login" },
+      ]
+    };
+  },
+  setup() {
+    const { user } = useAuthState()
+    const auth = getAuth()
+    const router = useRouter()
+    const signOutUser = async () => {
+      try {
+        await signOut(auth)
+        router.push('/login')
+      } catch (e) {
+        alert(e.message)
+      }
+    }
+    return { user, signOutUser }
+  }
 }
 </script>
 

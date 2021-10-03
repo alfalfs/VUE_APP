@@ -1,27 +1,24 @@
 <template>
-  <div class="card card-body mt-4">
-    <h3>Edit users</h3>
-    <form @submit.prevent="update">
-      <div class="form-group">
-        <label>Name</label>
-        <input v-model="form.name" class="form-control" required />
+<div class="row">
+        <div class="col-12 text-center mb-4">
+            <h3>Edit users</h3>
+        </div>        
+        <div class="col-sm-5 m-auto"> 
+          <div class="card card-body mt-4">    
+            <form @submit.prevent="update">
+              <div class="form-group">
+                <label>Name</label>
+                <input v-model="form.name" class="form-control" required />
+              </div>
+              <div class="form-group mt-3">
+                <label>Email</label>
+                <input v-model="form.email" class="form-control" type="email" required/>
+              </div>
+          <button type="submit" class="btn btn-primary  mt-3"> Update</button>
+        </form>
       </div>
-
-      <div class="form-group mt-3">
-        <label>Email</label>
-        <input
-          v-model="form.email"
-          class="form-control"
-          type="email"
-          required
-        />
-      </div>
-
-      <button type="submit" class="btn btn-primary  mt-3">
-        Update
-      </button>
-    </form>
-  </div>
+    </div>
+</div>
 </template>
 
 <script>

@@ -1,17 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getUserState } from '../firebase'
 import Home from '@/views/Home.vue'
-import Edit from '@/views/Edit.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { requiresAuth: true }
   },
   {
     path: '/edit/:id',
     name: 'Edit',
-    component: Edit
+    component: () => import('../views/Edit.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue'),
+    meta: { requiresUnauth: true }
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: () => import('../views/SignUp.vue'),
+    meta: { requiresUnauth: true }
   }
 ]
 
@@ -20,48 +34,17 @@ const router = createRouter({
   routes
 })
 
+
+//login-auth
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const requiresUnauth = to.matched.some(record => record.meta.requiresUnauth)
+
+  const isAuth = await getUserState()
+
+  if (requiresAuth && !isAuth) next('/login')
+  else if (requiresUnauth && isAuth) next('/')
+  else next()
+})
+
 export default router
-
-
-
-
-
-// import { createRouter, createWebHashHistory } from 'vue-router'
-// import Home from '../views/Home.vue'
-// // import Users from '../views/Users.vue'
-// import Edit from '@/views/Edit.vue'
-
-// const routes = [
-//   {
-//     path: '/',
-//     name: 'Home',
-//     component: Home
-//   },
-//   // {
-//   //   path: '/about',
-//   //   name: 'About',
-//   //   // route level code-splitting
-//   //   // this generates a separate chunk (about.[hash].js) for this route
-//   //   // which is lazy-loaded when the route is visited.
-//   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-//   // },
-//   // {
-//   //   path: '/',
-//   //   name: 'Users',
-//   //   // component: Users
-//   //   component: () => import(/* webpackChunkName: "users" */ '../views/Users.vue')
-//   // },
-//   {
-//     path: '/edit/:id',
-//     name: 'Edit',
-//     component: Edit
-//   }
-  
-// ]
-
-// const router = createRouter({
-//   history: createWebHashHistory(),
-//   routes
-// })
-
-// export default router

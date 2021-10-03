@@ -11,7 +11,7 @@
   "dependencies": {
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
-    "firebase": "^8.2.1",
+    "firebase": "^9.1.1",
     "firebase-tools": "^9.1.0",
     "register-service-worker": "^1.7.1",
     "vue": "^3.0.0",
