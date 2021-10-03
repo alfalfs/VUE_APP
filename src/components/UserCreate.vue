@@ -1,26 +1,24 @@
 <template>
+<div class="row">
+  <div class="col-12 text-center mb-4">
+    <h3>Add users emails</h3>
+  </div>        
+  <div class="col-sm-5 m-auto">
     <div class="card card-body mt-4 ">
       <form @submit.prevent="onSubmit">
         <div class="form-group">
           <label>Name</label>
           <input v-model="form.name" class="form-control" required />
         </div>
-
         <div class="form-group mt-3">
           <label>Email</label>
-          <input
-            v-model="form.email"
-            class="form-control"
-            type="email"
-            required
-          />
+          <input v-model="form.email" class="form-control" type="email" required />
         </div>
-
-        <button type="submit" class="btn btn-success mt-3">
-          Create User
-        </button>
+        <button type="submit" class="btn btn-success mt-3">Create User</button>
       </form>
     </div>
+  </div>
+</div>
 </template>
 
 <script>

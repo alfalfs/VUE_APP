@@ -1,36 +1,29 @@
-<template>
-    <div>
-        <h1>Login</h1>
-        <input type="text" name="username" v-model="input.username" placeholder="Username" />
-        <input type="password" name="password" v-model="input.password" placeholder="Password" />
-        <button type="button" v-on:click="login()">Login</button>
-    </div>
-</template>
-
 <script>
-    export default {
-        name: "Login",
-        data() {
-            return {
-                input: {
-                    username: "",
-                    password: ""
-                }
-            }
-        },
-        methods: {
-            login() {
-                if(this.input.username == "admin" && this.input.password == "pass") {
-                    // Additional logic here...
-                } else {
-                    console.log("The username and / or password is incorrect");
-                }
-            }
-        }
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { useRouter } from 'vue-router'
+export default {
+  setup() {
+    const auth = getAuth()
+    const router = useRouter()
+    const handleSubmit = async e => {
+      const { email, password } = e.target.elements
+      try {
+        await signInWithEmailAndPassword(auth, email.value, password.value)
+        router.push('/')
+      } catch (e) {
+        alert(e.message)
+      }
     }
+    return { handleSubmit }
+  }
+}
 </script>
 
-<style scoped></style>
-
-
-
+<template>
+  <h1>Login</h1>
+  <form @submit.prevent="handleSubmit">
+    <input name="email" placeholder="email" type="email" />
+    <input name="password" placeholder="password" type="password" />
+    <button type="submit">Login</button>
+  </form>
+</template>

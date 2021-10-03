@@ -1,6 +1,7 @@
 <template>
   <div class="home">    
     <Navbar />  
+    <h4>Welcome {{ user?.email }}!</h4>  
     <div class="container">     
       <UserCreate />
       <hr>
@@ -16,6 +17,6 @@ import UserList from '@/components/UserList.vue'
 
 export default {
   name: 'Home',
-  components: {Navbar,UserCreate, UserList }
+  components: {Navbar,UserCreate, UserList }  
 }
 </script>
